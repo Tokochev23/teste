@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Técnico de Blindado - Departamento de Engenharia Militar</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes temáticas do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&family=Oswald:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Link para o arquivo de estilos CSS da ficha -->
+    <link rel="stylesheet" href="assets/css/ficha.css">
+    <!-- html2canvas CDN para salvar como PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="ficha-container">
+        <div class="ficha-header">
+            <h1 id="ficha_tank_name">⚙️ Carregando Relatório Técnico...</h1>
+            <p id="ficha_tank_type_doctrine">Sistema de Análise de Blindados - 1939</p>
+        </div>
+
+        <div class="ficha-content" id="ficha_content_to_capture">
+            <!-- Seção de Imagem com Upload e Seleção -->
+            <div class="ficha-image-section">
+                <img id="ficha_matched_tank_image" src="https://placehold.co/400x200/3d4f2f/f7f3e9?text=BLUEPRINT+DO+BLINDADO&font=source" alt="Blueprint do Blindado" class="ficha-tank-image">
+                <p class="text-sm mt-2" style="color: var(--steel-gray);" id="image_source_text">Selecione blueprint de referência ou carregue esquema técnico.</p>
+                
+                <div class="image-controls">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="image_upload_input" accept="image/*" class="file-upload-input">
+                        <label for="image_upload_input" class="file-upload-button">📁 Carregar Blueprint</label>
+                    </div>
+                    
+                    <select id="real_tank_select" class="real-tank-select">
+                        <option value="">Ou selecione um modelo de referência...</option>
+                        <!-- Opções de tanques reais serão populadas via JS -->
+                    </select>
+                    <button id="apply_selected_tank" class="apply-button">🔧 Aplicar Modelo Selecionado</button>
+                </div>
+            </div>
+
+            <div class="ficha-section main-stats">
+                <h3>📊 Especificações Operacionais</h3>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="label">Custo/Unid:</span> <span id="ficha_unit_cost">€0</span></div>
+                    <div class="stat-item"><span class="label">Peso Total:</span> <span id="ficha_total_weight">0 kg</span></div>
+                    <div class="stat-item"><span class="label">Potência Total:</span> <span id="ficha_total_power">0 hp</span></div>
+                    <div class="stat-item"><span class="label">Velocidade Máx (Estrada):</span> <span id="ficha_speed_road">0 km/h</span></div>
+                    <div class="stat-item"><span class="label">Velocidade Máx (Off-road):</span> <span id="ficha_speed_offroad">0 km/h</span></div>
+                    <div class="stat-item"><span class="label">Blindagem Efetiva (Frontal):</span> <span id="ficha_effective_armor_front">0 mm</span></div>
+                    <div class="stat-item"><span class="label">Blindagem Efetiva (Lateral):</span> <span id="ficha_effective_armor_side">0 mm</span></div>
+                    <div class="stat-item"><span class="label">Armamento Principal:</span> <span id="ficha_main_armament">N/A</span></div>
+                    <div class="stat-item"><span class="label">Alcance Máximo:</span> <span id="ficha_max_range">0 km</span></div>
+                    <div class="stat-item"><span class="label">Conforto da Tripulação:</span> <span id="ficha_crew_comfort">0%</span></div>
+                    <div class="stat-item"><span class="label">Confiabilidade:</span> <span id="ficha_reliability">0%</span></div>
+                    <div class="stat-item"><span class="label">Número de Tripulantes:</span> <span id="ficha_num_crewmen">0</span></div>
+                </div>
+            </div>
+
+            <div class="ficha-section detailed-info">
+                <h3>🔧 Especificações Técnicas Detalhadas</h3>
+                <div class="info-grid">
+                    <div class="info-group">
+                        <span class="info-label">País de Origem / Doutrina:</span> 
+                        <span id="ficha_country_doctrine">N/A</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Tipo de Veículo:</span> 
+                        <span id="ficha_vehicle_type">N/A</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Sistema de Locomoção:</span> 
+                        <span id="ficha_mobility_type">N/A</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Tipo de Suspensão:</span> 
+                        <span id="ficha_suspension_type">N/A</span>
+                        <p class="info-description" id="ficha_suspension_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Especificações do Motor:</span> 
+                        <span id="ficha_engine_type">N/A</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Tipo de Combustível:</span> 
+                        <span id="ficha_fuel_type">N/A</span>
+                        <p class="info-description" id="ficha_fuel_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Disposição do Motor:</span> 
+                        <span id="ficha_engine_disposition">N/A</span>
+                        <p class="info-description" id="ficha_engine_disposition_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Sistema de Transmissão:</span> 
+                        <span id="ficha_transmission_type">N/A</span>
+                        <p class="info-description" id="ficha_transmission_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Produção da Blindagem:</span> 
+                        <span id="ficha_armor_production_type">N/A</span>
+                        <p class="info-description" id="ficha_armor_production_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Blindagens Adicionais:</span> 
+                        <span id="ficha_additional_armor">Nenhuma</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Especificações do Canhão:</span> 
+                        <span id="ficha_main_gun_length_description">N/A</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Sistema de Recarga:</span> 
+                        <span id="ficha_reload_mechanism">Manual</span>
+                        <p class="info-description" id="ficha_reload_mechanism_description"></p>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Capacidade de Munição:</span> 
+                        <span id="ficha_ammo_capacity">0/0 projéteis</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Tipos de Munição:</span> 
+                        <span id="ficha_ammo_types">Nenhuma</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Armamento Secundário:</span> 
+                        <span id="ficha_secondary_armaments">Nenhum</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Equipamentos Auxiliares:</span> 
+                        <span id="ficha_extra_equipment">Nenhum</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Observações da Tripulação:</span> 
+                        <span id="ficha_crew_note">Nenhuma observação registrada.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ficha-section production-info">
+                <h3>🏭 Informações de Produção e Logística</h3>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="label">Custo Total (<span id="ficha_quantity_label">1x</span>):</span> <span id="ficha_total_production_cost">€0</span></div>
+                    <div class="stat-item"><span class="label">Custo em Metal (Total):</span> <span id="ficha_total_metal_cost">0 kg</span></div>
+                    <div class="stat-item"><span class="label">Capacidade de Produção (País):</span> <span id="ficha_country_production_capacity">N/A</span></div>
+                    <div class="stat-item"><span class="label">Unidades Produzíveis (Max):</span> <span id="ficha_producible_units">N/A</span></div>
+                    <div class="stat-item"><span class="label">Saldo de Metais (País):</span> <span id="ficha_country_metal_balance">N/A</span></div>
+                </div>
+                <div id="ficha_metal_balance_status" class="status-indicator"></div>
+                <div id="ficha_design_status" class="status-indicator"></div>
+            </div>
+        </div>
+
+        <div class="ficha-actions">
+            <button id="save_ficha_button" class="save-button">💾 Salvar Relatório</button>
+            <button id="back_button" class="back-button" onclick="window.close()">↩️ Voltar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tankDataString = localStorage.getItem('tankSheetData');
+            const realWorldTanksString = localStorage.getItem('realWorldTanksData');
+            let realWorldTanks = [];
+
+            if (realWorldTanksString) {
+                realWorldTanks = JSON.parse(realWorldTanksString);
+                console.log("Dados de tanques reais carregados para a ficha:", realWorldTanks);
+            }
+
+            if (tankDataString) {
+                const tankData = JSON.parse(tankDataString);
+                console.log("Dados do tanque carregados para a ficha:", tankData);
+
+                // Preencher o cabeçalho
+                document.getElementById('ficha_tank_name').innerHTML = `⚙️ ${tankData.vehicleName}`;
+                document.getElementById('ficha_tank_type_doctrine').textContent = `${tankData.vehicleTypeName} - Doutrina: ${tankData.doctrineName}`;
+
+                // Preencher Estatísticas Principais
+                document.getElementById('ficha_unit_cost').textContent = `€${tankData.finalUnitCost}`;
+                document.getElementById('ficha_total_weight').textContent = tankData.totalWeight;
+                document.getElementById('ficha_total_power').textContent = tankData.totalPower;
+                document.getElementById('ficha_speed_road').textContent = tankData.speedRoad;
+                document.getElementById('ficha_speed_offroad').textContent = tankData.speedOffroad;
+                document.getElementById('ficha_effective_armor_front').textContent = tankData.effectiveArmorFront;
+                document.getElementById('ficha_effective_armor_side').textContent = tankData.effectiveArmorSide;
+                document.getElementById('ficha_main_armament').textContent = tankData.mainArmamentText;
+                document.getElementById('ficha_max_range').textContent = tankData.maxRange;
+                document.getElementById('ficha_crew_comfort').textContent = tankData.crewComfort;
+                document.getElementById('ficha_reliability').textContent = tankData.reliability;
+                document.getElementById('ficha_num_crewmen').textContent = tankData.numCrewmen;
+
+                // Preencher Detalhes da Configuração
+                document.getElementById('ficha_country_doctrine').textContent = tankData.selectedCountryName;
+                document.getElementById('ficha_vehicle_type').textContent = tankData.vehicleTypeName;
+                document.getElementById('ficha_mobility_type').textContent = tankData.mobilityTypeName;
+                document.getElementById('ficha_suspension_type').textContent = tankData.suspensionTypeName;
+                document.getElementById('ficha_suspension_description').textContent = tankData.suspensionDescription || '';
+                document.getElementById('ficha_engine_type').textContent = tankData.engineTypeName + ` (${tankData.enginePower} HP)`;
+                document.getElementById('ficha_fuel_type').textContent = tankData.fuelTypeName;
+                document.getElementById('ficha_fuel_description').textContent = tankData.fuelTypeDescription || '';
+                document.getElementById('ficha_engine_disposition').textContent = tankData.engineDispositionName;
+                document.getElementById('ficha_engine_disposition_description').textContent = tankData.engineDispositionDescription || '';
+                document.getElementById('ficha_transmission_type').textContent = tankData.transmissionTypeName;
+                document.getElementById('ficha_transmission_description').textContent = tankData.transmissionDescription || '';
+                document.getElementById('ficha_armor_production_type').textContent = tankData.armorProductionTypeName;
+                document.getElementById('ficha_armor_production_description').textContent = tankData.armorProductionDescription || '';
+                document.getElementById('ficha_additional_armor').textContent = tankData.selectedAdditionalArmor.join(', ') || 'Nenhuma';
+                document.getElementById('ficha_main_gun_length_description').textContent = tankData.mainGunLengthDescription;
+                document.getElementById('ficha_reload_mechanism').textContent = tankData.reloadMechanismName;
+                document.getElementById('ficha_reload_mechanism_description').textContent = tankData.reloadMechanismDescription || '';
+                document.getElementById('ficha_ammo_capacity').textContent = `${tankData.currentTotalAmmoQty}/${tankData.totalAmmoCapacity} projéteis`;
+                document.getElementById('ficha_ammo_types').textContent = tankData.selectedAmmoTypes.join(', ') || 'Nenhuma';
+                document.getElementById('ficha_secondary_armaments').textContent = tankData.selectedSecondaryArmaments.join(', ') || 'Nenhum';
+                document.getElementById('ficha_extra_equipment').textContent = tankData.selectedExtraEquipment.join(', ') || 'Nenhum';
+                document.getElementById('ficha_crew_note').textContent = tankData.crewNoteText || 'Nenhuma observação registrada.';
+
+                // Preencher Informações de Produção
+                document.getElementById('ficha_quantity_label').textContent = `${tankData.quantity}x`;
+                document.getElementById('ficha_total_production_cost').textContent = `€${tankData.totalProductionCost}`;
+                document.getElementById('ficha_total_metal_cost').textContent = `${tankData.totalMetalCost} kg`;
+                document.getElementById('ficha_country_production_capacity').textContent = tankData.countryProductionCapacity;
+                document.getElementById('ficha_producible_units').textContent = tankData.producibleUnits;
+                document.getElementById('ficha_country_metal_balance').textContent = `${tankData.countryMetalBalance} kg`;
+                
+                const metalStatusEl = document.getElementById('ficha_metal_balance_status');
+                metalStatusEl.textContent = tankData.metalBalanceStatusText;
+                metalStatusEl.className = `status-indicator ${tankData.metalBalanceStatusClass}`;
+
+                const designStatusEl = document.getElementById('ficha_design_status');
+                designStatusEl.textContent = tankData.statusMessage;
+                designStatusEl.className = `status-indicator ${tankData.statusClass}`;
+
+                // --- Lógica de Upload/Seleção de Imagem ---
+                const imageUploadInput = document.getElementById('image_upload_input');
+                const realTankSelect = document.getElementById('real_tank_select');
+                const applySelectedTankButton = document.getElementById('apply_selected_tank');
+                const fichaMatchedTankImage = document.getElementById('ficha_matched_tank_image');
+                const imageSourceText = document.getElementById('image_source_text');
+
+                // Popular o dropdown de tanques reais
+                realWorldTanks.sort((a, b) => a.name.localeCompare(b.name)).forEach(tank => {
+                    const option = document.createElement('option');
+                    option.value = tank.id;
+                    option.textContent = tank.name;
+                    realTankSelect.appendChild(option);
+                });
+
+                // Event listener para upload de imagem
+                imageUploadInput.addEventListener('change', (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            fichaMatchedTankImage.src = e.target.result;
+                            imageSourceText.textContent = `Blueprint personalizado para ${tankData.vehicleName}`;
+                            realTankSelect.value = ""; 
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Event listener para aplicar tanque selecionado do dropdown
+                applySelectedTankButton.addEventListener('click', () => {
+                    const selectedTankId = realTankSelect.value;
+                    if (selectedTankId) {
+                        const selectedTank = realWorldTanks.find(tank => tank.id === selectedTankId);
+                        if (selectedTank) {
+                            fichaMatchedTankImage.src = selectedTank.image_url || 'https://placehold.co/400x200/3d4f2f/f7f3e9?text=BLUEPRINT+INDISPONIVEL&font=source';
+                            imageSourceText.textContent = `Modelo de referência: ${selectedTank.name}`;
+                            imageUploadInput.value = ''; 
+                        }
+                    }
+                });
+
+                // Funcionalidade de salvar como PNG
+                document.getElementById('save_ficha_button').addEventListener('click', () => {
+                    const fichaContent = document.getElementById('ficha_content_to_capture');
+                    
+                    // Feedback visual
+                    const saveButton = document.getElementById('save_ficha_button');
+                    const originalText = saveButton.textContent;
+                    saveButton.textContent = '⏳ Gerando Relatório...';
+                    saveButton.disabled = true;
+                    
+                    html2canvas(fichaContent, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: '#f7f3e9'
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        const timestamp = new Date().toISOString().slice(0, 10);
+                        link.download = `Relatorio_Tecnico_${tankData.vehicleName.replace(/ /g, '_')}_${timestamp}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                        
+                        // Restaurar botão
+                        saveButton.textContent = '✅ Relatório Salvo!';
+                        setTimeout(() => {
+                            saveButton.textContent = originalText;
+                            saveButton.disabled = false;
+                        }, 2000);
+                    }).catch(error => {
+                        console.error('Erro ao gerar a imagem da ficha:', error);
+                        saveButton.textContent = '❌ Erro ao Salvar';
+                        setTimeout(() => {
+                            saveButton.textContent = originalText;
+                            saveButton.disabled = false;
+                        }, 2000);
+                    });
+                });
+
+            } else {
+                document.getElementById('ficha_tank_name').innerHTML = '⚠️ Dados Não Encontrados';
+                document.getElementById('ficha_tank_type_doctrine').textContent = 'Por favor, crie um blindado na página principal primeiro.';
+                document.getElementById('save_ficha_button').disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
