@@ -1,0 +1,620 @@
+/* assets/css/ficha.css - War 1939 Military Theme */
+
+:root {
+    --military-green: #3d4f2f;
+    --steel-gray: #4a5568;
+    --brass-gold: #b7791f;
+    --paper-cream: #f7f3e9;
+    --ink-black: #2d3748;
+    --rust-red: #a53f2b;
+    --gunmetal: #2c3e50;
+    --olive-drab: #6b8e23;
+}
+
+/* Custom scrollbar for military theme */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--paper-cream);
+    border-radius: 6px;
+    border: 1px solid var(--steel-gray);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--brass-gold) 0%, var(--military-green) 100%);
+    border-radius: 6px;
+    border: 1px solid var(--steel-gray);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--military-green) 0%, var(--brass-gold) 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    background: linear-gradient(45deg, var(--paper-cream) 0%, #ede7d9 100%);
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(61, 79, 47, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(183, 121, 31, 0.05) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: var(--ink-black);
+    line-height: 1.4;
+}
+
+.ficha-container {
+    background: var(--paper-cream);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 3px solid var(--steel-gray);
+    max-width: 900px;
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.ficha-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 50%, var(--brass-gold) 100%);
+    z-index: 1;
+}
+
+.ficha-header {
+    background: linear-gradient(135deg, var(--military-green) 0%, var(--gunmetal) 100%);
+    color: var(--paper-cream);
+    padding: 25px;
+    text-align: center;
+    border-bottom: 4px solid var(--brass-gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.ficha-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255,255,255,0.02) 10px,
+            rgba(255,255,255,0.02) 20px
+        );
+    pointer-events: none;
+}
+
+.ficha-header::after {
+    content: 'CONFIDENCIAL';
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: var(--rust-red);
+    color: var(--paper-cream);
+    padding: 6px 12px;
+    transform: rotate(15deg);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: 2px solid var(--paper-cream);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    border-radius: 4px;
+}
+
+.ficha-header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.ficha-header p {
+    font-size: 1rem;
+    color: var(--brass-gold);
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
+
+.ficha-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background: var(--paper-cream);
+}
+
+.ficha-image-section {
+    text-align: center;
+    margin-bottom: 20px;
+    background: rgba(244, 228, 193, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid var(--steel-gray);
+    box-shadow: 
+        inset 0 1px 3px rgba(0,0,0,0.1),
+        0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.ficha-image-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 100%);
+    border-radius: 8px 8px 0 0;
+}
+
+.ficha-image-section::after {
+    content: "SCHEMATIC";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.7rem;
+    color: var(--steel-gray);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.ficha-tank-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 2px solid var(--steel-gray);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+    background: var(--paper-cream);
+}
+
+.image-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.file-upload-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.file-upload-button {
+    background: linear-gradient(135deg, var(--olive-drab) 0%, var(--military-green) 100%);
+    color: var(--paper-cream);
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--brass-gold);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.file-upload-button:hover {
+    background: linear-gradient(135deg, var(--military-green) 0%, var(--olive-drab) 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+}
+
+.real-tank-select, .apply-button {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--steel-gray);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: var(--paper-cream);
+    color: var(--ink-black);
+    transition: all 0.3s ease;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 500;
+}
+
+.real-tank-select:focus, .apply-button:focus {
+    outline: none;
+    border-color: var(--brass-gold);
+    box-shadow: 0 0 0 3px rgba(183, 121, 31, 0.2);
+}
+
+.apply-button {
+    background: linear-gradient(135deg, var(--brass-gold) 0%, #9a6518 100%);
+    color: var(--paper-cream);
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--steel-gray);
+}
+
+.apply-button:hover {
+    background: linear-gradient(135deg, #9a6518 0%, var(--brass-gold) 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+}
+
+.ficha-section {
+    background: rgba(244, 228, 193, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid var(--steel-gray);
+    box-shadow: 
+        inset 0 1px 3px rgba(0,0,0,0.1),
+        0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.ficha-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 100%);
+    border-radius: 8px 8px 0 0;
+}
+
+.ficha-section::after {
+    content: "• • • • • • • •";
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    color: var(--steel-gray);
+    font-size: 8px;
+    opacity: 0.6;
+}
+
+.ficha-section h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--military-green);
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--brass-gold);
+    padding-bottom: 8px;
+    font-weight: 500;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 600px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: 'Source Code Pro', monospace;
+    border: 1px solid rgba(74, 85, 104, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: var(--brass-gold);
+}
+
+.stat-item .label {
+    font-weight: 600;
+    color: var(--ink-black);
+}
+
+.stat-item span:last-child {
+    font-weight: 600;
+    color: var(--military-green);
+}
+
+/* Cores específicas para valores */
+.stat-item #ficha_speed_road,
+.stat-item #ficha_speed_offroad,
+.stat-item #ficha_effective_armor_front,
+.stat-item #ficha_effective_armor_side,
+.stat-item #ficha_main_armament,
+.stat-item #ficha_max_range,
+.stat-item #ficha_crew_comfort,
+.stat-item #ficha_reliability {
+    color: var(--olive-drab) !important;
+}
+
+.stat-item #ficha_unit_cost,
+.stat-item #ficha_total_production_cost {
+    color: var(--military-green) !important;
+}
+
+.stat-item #ficha_total_metal_cost {
+    color: var(--brass-gold) !important;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 600px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.info-group {
+    margin-bottom: 8px;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(74, 85, 104, 0.3);
+}
+
+.info-group:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--ink-black);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    font-family: 'Source Code Pro', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-group span:not(.info-label) {
+    color: var(--military-green);
+    font-size: 0.95rem;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 500;
+}
+
+.info-description {
+    font-size: 0.85rem;
+    color: var(--steel-gray);
+    margin-top: 4px;
+    padding-left: 10px;
+    border-left: 3px solid var(--brass-gold);
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* Status Indicator */
+.status-indicator {
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin: 12px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'Source Code Pro', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid;
+}
+
+.status-ok {
+    background: rgba(107, 142, 35, 0.1);
+    color: var(--olive-drab);
+    border-color: var(--olive-drab);
+}
+
+.status-warning {
+    background: rgba(183, 121, 31, 0.1);
+    color: var(--brass-gold);
+    border-color: var(--brass-gold);
+}
+
+.status-error {
+    background: rgba(165, 63, 43, 0.1);
+    color: var(--rust-red);
+    border-color: var(--rust-red);
+}
+
+.ficha-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 25px;
+    background: rgba(244, 228, 193, 0.5);
+    border-top: 3px solid var(--brass-gold);
+    position: relative;
+}
+
+.ficha-actions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--military-green), transparent);
+}
+
+.save-button, .back-button {
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.save-button {
+    background: linear-gradient(135deg, var(--olive-drab) 0%, var(--military-green) 100%);
+    color: var(--paper-cream);
+    border-color: var(--brass-gold);
+    box-shadow: 0 4px 12px rgba(107, 142, 35, 0.3);
+}
+
+.save-button:hover {
+    background: linear-gradient(135deg, var(--military-green) 0%, var(--olive-drab) 100%);
+    box-shadow: 0 6px 18px rgba(107, 142, 35, 0.4);
+    transform: translateY(-3px);
+}
+
+.back-button {
+    background: linear-gradient(135deg, var(--steel-gray) 0%, var(--gunmetal) 100%);
+    color: var(--paper-cream);
+    border-color: var(--steel-gray);
+    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3);
+}
+
+.back-button:hover {
+    background: linear-gradient(135deg, var(--gunmetal) 0%, var(--steel-gray) 100%);
+    box-shadow: 0 6px 18px rgba(74, 85, 104, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Media Queries para responsividade da ficha */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .ficha-container {
+        margin: 10px 0;
+        border-radius: 6px;
+    }
+    
+    .ficha-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .ficha-header p {
+        font-size: 0.9rem;
+    }
+    
+    .ficha-header::after {
+        top: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+    
+    .ficha-content {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .ficha-section {
+        padding: 15px;
+        border-radius: 6px;
+    }
+    
+    .ficha-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .stat-item, .info-group span {
+        font-size: 0.85rem;
+    }
+    
+    .info-label {
+        font-size: 0.8rem;
+    }
+    
+    .info-group span:not(.info-label) {
+        font-size: 0.9rem;
+    }
+    
+    .info-description {
+        font-size: 0.75rem;
+    }
+    
+    .status-indicator {
+        font-size: 0.85rem;
+        padding: 10px 15px;
+    }
+
+    .ficha-actions {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+    }
+    
+    .save-button, .back-button {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .image-controls {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
