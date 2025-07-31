@@ -1,5 +1,4 @@
-/* assets/css/main.css - War 1939 Military Theme */
-
+/* assets/css/main.css */
 :root {
     --military-green: #3d4f2f;
     --steel-gray: #4a5568;
@@ -11,25 +10,6 @@
     --olive-drab: #6b8e23;
 }
 
-/* Custom scrollbar for military theme */
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-::-webkit-scrollbar-track {
-    background: var(--paper-cream);
-    border-radius: 6px;
-    border: 1px solid var(--steel-gray);
-}
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--brass-gold) 0%, var(--military-green) 100%);
-    border-radius: 6px;
-    border: 1px solid var(--steel-gray);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--military-green) 0%, var(--brass-gold) 100%);
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -39,57 +19,32 @@
 body {
     font-family: 'Roboto Slab', serif;
     background: linear-gradient(45deg, var(--paper-cream) 0%, #ede7d9 100%);
-    background-image: 
-        radial-gradient(circle at 25% 25%, rgba(61, 79, 47, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(183, 121, 31, 0.05) 0%, transparent 50%),
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    background-image:
+        radial-gradient(circle at 25% 25%, rgba(61, 79, 47, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(183, 121, 31, 0.03) 0%, transparent 50%);
     color: var(--ink-black);
     line-height: 1.4;
     min-height: 100vh;
-    padding: 20px;
 }
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: rgba(247, 243, 233, 0.95);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    border: 3px solid var(--steel-gray);
-    position: relative;
-}
-
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 50%, var(--brass-gold) 100%);
-    z-index: 1;
-}
-
-/* Header Section */
-.header {
+.document-header {
     background: linear-gradient(135deg, var(--military-green) 0%, var(--gunmetal) 100%);
     color: var(--paper-cream);
-    padding: 25px 30px;
+    padding: 20px;
     border-bottom: 4px solid var(--brass-gold);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     position: relative;
     overflow: hidden;
 }
 
-.header::before {
+.document-header::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         repeating-linear-gradient(
             45deg,
             transparent,
@@ -97,60 +52,72 @@ body {
             rgba(255,255,255,0.02) 10px,
             rgba(255,255,255,0.02) 20px
         );
-    pointer-events: none;
 }
 
-.header::after {
-    content: 'DEPARTAMENTO DE ENGENHARIA MILITAR - 1939';
-    position: absolute;
-    top: 8px;
-    right: 20px;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.7rem;
-    color: var(--brass-gold);
-    font-weight: 500;
-    letter-spacing: 1px;
-}
-
-.header h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.document-header .content {
     position: relative;
     z-index: 1;
+    text-align: center;
 }
 
-.header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+.document-header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.document-header .subtitle {
+    font-size: 1rem;
     color: var(--brass-gold);
     font-weight: 300;
     letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
 }
 
-.main-content {
+.classification-stamp {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: var(--rust-red);
+    color: white;
+    padding: 8px 16px;
+    transform: rotate(15deg);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 2px solid var(--paper-cream);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
-    padding: 30px;
-    background: var(--paper-cream);
+}
+
+.form-sections-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .form-section {
     background: var(--paper-cream);
-    border: 2px solid var(--steel-gray);
-    border-radius: 8px;
+    border: 1px solid var(--steel-gray);
+    border-radius: 4px;
     padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 
+    box-shadow:
         inset 0 1px 3px rgba(0,0,0,0.1),
         0 2px 8px rgba(0,0,0,0.1);
     position: relative;
+    animation: slideInUp 0.6s ease-out;
 }
 
 .form-section::before {
@@ -161,17 +128,8 @@ body {
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 100%);
-    border-radius: 8px 8px 0 0;
-}
-
-.form-section::after {
-    content: "• • • • • • • •";
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    color: var(--steel-gray);
-    font-size: 8px;
-    opacity: 0.6;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .form-section h3 {
@@ -184,9 +142,6 @@ body {
     letter-spacing: 1px;
     border-bottom: 2px solid var(--brass-gold);
     padding-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .form-group {
@@ -195,241 +150,51 @@ body {
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
     font-weight: 500;
     color: var(--ink-black);
+    margin-bottom: 8px;
     font-size: 0.95rem;
-    font-family: 'Source Code Pro', monospace;
 }
 
-/* Inputs e Selects */
-input[type="text"], 
-input[type="number"], 
-select {
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
     width: 100%;
     padding: 12px;
-    border: 2px solid var(--steel-gray);
+    border: 1px solid var(--steel-gray);
     border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--ink-black);
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 500;
 }
 
-input[type="text"]:focus, 
-input[type="number"]:focus, 
-select:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--brass-gold);
     box-shadow: 0 0 0 3px rgba(183, 121, 31, 0.2);
-    background: rgba(255, 255, 255, 1);
 }
 
-select option {
-    background-color: var(--paper-cream) !important;
-    color: var(--ink-black) !important;
-    font-family: 'Source Code Pro', monospace;
-}
-
-/* Range Slider */
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 8px;
-    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 100%);
-    border-radius: 4px;
-    outline: none;
-    border: 1px solid var(--steel-gray);
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    background: var(--gunmetal);
-    border: 3px solid var(--brass-gold);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: var(--gunmetal);
-    border: 3px solid var(--brass-gold);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Checkbox styling */
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: inline-block;
-    vertical-align: middle;
-    height: 20px;
-    width: 20px;
-    border: 2px solid var(--steel-gray);
-    border-radius: 3px;
-    background-color: var(--paper-cream);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-input[type="checkbox"]:checked {
-    background-color: var(--military-green);
-    border-color: var(--brass-gold);
-}
-
-input[type="checkbox"]:checked::after {
-    content: '✓';
-    display: block;
-    color: var(--paper-cream);
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 16px;
-    text-align: center;
-    position: absolute;
-    top: -1px;
-    left: 1px;
-}
-
-input[type="checkbox"]:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(183, 121, 31, 0.3);
-}
-
-.item-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(244, 228, 193, 0.3);
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(74, 85, 104, 0.2);
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-.item-row:hover {
-    background: rgba(244, 228, 193, 0.5);
-    border-color: var(--brass-gold);
-}
-
-.item-row label {
-    color: var(--ink-black);
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.9rem;
-    flex-grow: 1;
-    margin-left: 10px;
-    margin-bottom: 0;
-}
-
-.item-row input[type="number"] {
-    width: 80px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: var(--ink-black);
-    border: 1px solid var(--steel-gray);
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 600;
-    padding: 6px;
-}
-
-/* Grid layouts */
 .grid {
     display: grid;
     gap: 20px;
-}
-
-.grid-cols-1 {
-    grid-template-columns: 1fr;
 }
 
 .grid-cols-2 {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.col-span-full {
-    grid-column: 1 / -1;
-}
-
-/* Tooltip style */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: help;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 280px;
-    background-color: var(--gunmetal);
-    color: var(--paper-cream);
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    z-index: 1000;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -140px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 0.8rem;
-    font-family: 'Source Code Pro', monospace;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    border: 1px solid var(--brass-gold);
-}
-
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: var(--gunmetal) transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Summary Panel */
 .summary-panel {
     background: var(--paper-cream);
-    border: 3px solid var(--military-green);
-    border-radius: 8px;
+    border: 2px solid var(--military-green);
+    border-radius: 4px;
     padding: 25px;
     height: fit-content;
     position: sticky;
     top: 20px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    position: relative;
-}
-
-.summary-panel::before {
-    content: 'RELATÓRIO TÉCNICO';
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    background: var(--paper-cream);
-    padding: 0 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.8rem;
-    color: var(--military-green);
-    font-weight: 600;
-    letter-spacing: 1px;
+    cursor: pointer; /* Indica que é clicável para gerar a ficha */
 }
 
 .summary-panel h3 {
@@ -440,98 +205,174 @@ input[type="checkbox"]:focus {
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 3px solid var(--brass-gold);
+    border-bottom: 2px solid var(--brass-gold);
     padding-bottom: 10px;
 }
 
-.bg-gray-100 {
-    background: rgba(244, 228, 193, 0.3);
-    border: 1px solid var(--steel-gray);
-    border-radius: 6px;
-    padding: 15px;
+.spec-section {
     margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed var(--steel-gray);
+}
+.spec-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-.flex {
+.spec-row {
     display: flex;
-}
-
-.justify-between {
     justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(74, 85, 104, 0.3);
+}
+.spec-section .spec-row:last-child {
+    border-bottom: none;
 }
 
-.items-center {
-    align-items: center;
-}
-
-.font-semibold {
-    font-weight: 600;
-    font-family: 'Source Code Pro', monospace;
+.spec-label {
+    font-weight: 500;
     color: var(--ink-black);
 }
 
-.font-medium {
-    font-weight: 500;
+.spec-value {
     font-family: 'Source Code Pro', monospace;
+    font-weight: 500;
     color: var(--military-green);
 }
 
-/* Status Indicator */
-.status-indicator {
-    padding: 12px 20px;
-    border-radius: 6px;
-    margin: 15px 0;
-    text-align: center;
-    font-weight: 600;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.9rem;
-    border: 2px solid;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.status-ok {
-    background: rgba(107, 142, 35, 0.1);
-    color: var(--olive-drab);
-    border-color: var(--olive-drab);
-}
-
-.status-warning {
+.total-cost {
     background: rgba(183, 121, 31, 0.1);
+    padding: 10px;
+    margin: 5px -10px;
+    border-radius: 4px;
+}
+.total-cost .spec-label, .total-cost .spec-value {
+    font-weight: bold;
     color: var(--brass-gold);
-    border-color: var(--brass-gold);
 }
 
-.status-error {
-    background: rgba(165, 63, 43, 0.1);
-    color: var(--rust-red);
-    border-color: var(--rust-red);
+
+.item-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(74, 85, 104, 0.2);
 }
 
-/* Utility classes */
-.text-sm {
-    font-size: 0.85rem;
+.item-row:last-child {
+    border-bottom: none;
 }
 
-.text-center {
+.item-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--military-green);
+}
+
+.item-row input[type="number"] {
+    width: 80px;
+    padding: 6px;
+    border: 1px solid var(--steel-gray);
+    border-radius: 3px;
+    font-family: 'Source Code Pro', monospace;
     text-align: center;
 }
-
-.mt-2 {
-    margin-top: 8px;
+.item-row label {
+    margin: 0;
 }
 
-.mt-4 {
-    margin-top: 16px;
+.status-indicator {
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 500;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.5s ease;
+}
+.status-indicator.status-ok {
+    background: linear-gradient(135deg, var(--olive-drab) 0%, var(--military-green) 100%);
+}
+.status-indicator.status-warning,
+.status-indicator.status-error {
+     background: linear-gradient(135deg, var(--rust-red) 0%, #8b0000 100%);
 }
 
-.space-y-2 > * + * {
-    margin-top: 8px;
+
+.technical-note {
+    background: rgba(183, 121, 31, 0.08);
+    border-left: 3px solid var(--brass-gold);
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-black);
+    border-radius: 0 4px 4px 0;
 }
 
-/* Animations */
-.form-section {
-    animation: slideInUp 0.6s ease-out;
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--brass-gold) 0%, var(--military-green) 100%);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--gunmetal);
+    border: 2px solid var(--paper-cream);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: var(--steel-gray);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+.tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: var(--gunmetal);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
 
 @keyframes slideInUp {
@@ -545,46 +386,34 @@ input[type="checkbox"]:focus {
     }
 }
 
-/* Media Queries */
 @media (max-width: 1024px) {
-    .main-content {
+    .main-container {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
-    
     .summary-panel {
         position: static;
-        margin-top: 20px;
+        margin-top: 30px;
     }
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .document-header h1 {
+        font-size: 1.8rem;
     }
-    
-    .header h1 {
-        font-size: 2rem;
+    .classification-stamp {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+        top: 5px;
+        right: 5px;
     }
-    
-    .header::after {
-        display: none;
-    }
-    
-    .main-content {
-        padding: 15px;
-    }
-    
-    .form-section, .summary-panel {
-        padding: 15px;
-    }
-    
     .grid-cols-2 {
         grid-template-columns: 1fr;
     }
-    
-    .tooltip .tooltiptext {
-        width: 220px;
-        margin-left: -110px;
+    .main-container {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    .form-section {
+        padding: 15px;
     }
 }
